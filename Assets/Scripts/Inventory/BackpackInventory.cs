@@ -46,14 +46,14 @@ public class BackpackInventory : Inventory
             dublicate.Count = dublicate.LimitCount;
             newItem.Count = resultCount - newItem.LimitCount;
 
+            _inventoryDisplay.UpdateCountCells(dublicate);
+
             if (TryFindSpaceDublicate(newItem, out Item dublicate1))
             {
                 SumItemLogic(newItem, dublicate1);
                 return;
             }
-                
-
-            _inventoryDisplay.UpdateCountCells(dublicate);
+            
             _itemList.Add(newItem);
             _inventoryDisplay.AddDisplayItem(newItem);
             return;

@@ -37,7 +37,7 @@ public class IdleState : EnemyState
 
     private void LateUpdate()
     {
-        if (Vector3.Distance(_randomPoint, transform.position) <= 0.1f && _isAwaitMove)
+        if (Vector3.Distance(_randomPoint, transform.position) <= 0.3f && !_isAwaitMove)
             _isAwaitMove = true;
 
         if (Vector3.Distance(_player.transform.position, transform.position) <= _triggerRange && _player.gameObject.activeSelf)
