@@ -10,6 +10,7 @@ public class ControllerGun : MonoBehaviour
     [SerializeField] private Button _relaodButton;
     [SerializeField] private TMP_Text _ammoText;
 
+
     public void SetupGun(Gun gun)
     {
         if (gun == _currentWeapon || !_currentWeapon.IsReaduReload) return;

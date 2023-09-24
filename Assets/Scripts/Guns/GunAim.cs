@@ -6,6 +6,7 @@ public class GunAim : MonoBehaviour
     [SerializeField] private FixedJoystick _joystick;
     [SerializeField] private float _aimRange = 5f;
 
+
     private EnemyDetected _enemyDetected;
     private Transform _targetTransform;
     private Vector3 _duraction;

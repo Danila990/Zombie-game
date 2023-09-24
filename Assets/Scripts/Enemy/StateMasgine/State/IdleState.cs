@@ -10,7 +10,8 @@ public class IdleState : EnemyState
     [SerializeField] private float _rangeMove = 4;
 
     private bool _isAwaitMove = true;
-    private Vector3 _randomPoint;
+    private float _timerMove = 0;
+    private Vector3 _randomPoint = Vector3.zero;
 
     private void OnEnable()
     {
@@ -23,24 +24,27 @@ public class IdleState : EnemyState
         _enemyHealth.OnTakeDamage -= Exit;
     }
 
+    private void Update()
+    {
+        _timerMove += Time.deltaTime;
+        if (_timerMove >= _timeToMove && _isAwaitMove)
+        {
+            _isAwaitMove = false;
+            RandomPoint();
+            _timerMove = _timeToMove;
+        }
+    }
+
     private void LateUpdate()
     {
-        if(_randomPoint == transform.position && _isAwaitMove)
-            AwaitTime();
+        if (Vector3.Distance(_randomPoint, transform.position) <= 0.1f && _isAwaitMove)
+            _isAwaitMove = true;
 
-        if (Vector3.Distance(_player.transform.position, transform.position) <= _triggerRange)
+        if (Vector3.Distance(_player.transform.position, transform.position) <= _triggerRange && _player.gameObject.activeSelf)
             Exit();
 
         Vector3 direction = _randomPoint - transform.position;
         transform.Translate(direction.normalized * _speedIdle * Time.deltaTime);
-    }
-
-    private async void AwaitTime()
-    {
-        _isAwaitMove = false;
-        await Task.Delay((int) _timeToMove * 1000);
-        RandomPoint();
-        _isAwaitMove = true;
     }
 
     private void RandomPoint()

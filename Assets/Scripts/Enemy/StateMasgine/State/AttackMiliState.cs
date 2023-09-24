@@ -17,6 +17,16 @@ public class AttackMiliState : EnemyState
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
+    private void OnEnable()
+    {
+        _player.OnPlayerDead += Exit;
+    }
+
+    private void OnDisable()
+    {
+        _player.OnPlayerDead -= Exit;
+    }
+
     private void LateUpdate()
     {
         if(Vector3.Distance(_player.transform.position, transform.position) >= _rangeAttack)
@@ -31,11 +41,8 @@ public class AttackMiliState : EnemyState
         if (Vector3.Distance(_player.transform.position, transform.position) <= _rangeAttack && _isReadiAttack)
         {
             _player.TakeDamage(_damage);
-            FireTimer();
+            AttackTimer();
         }
-
-        if (_player == null)
-            Exit();
     }
 
     private void FixedUpdate()
@@ -45,10 +52,10 @@ public class AttackMiliState : EnemyState
 
     public override void Exit()
     {
-        _stateMashine.TransitToNext();
+        _stateMashine.TransitToPrevious();
     }
 
-    private async void FireTimer()
+    private async void AttackTimer()
     {
         _isReadiAttack = false;
         await Task.Delay((int)(_attackRate * 1000));

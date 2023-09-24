@@ -1,11 +1,20 @@
 using System;
 using UnityEngine;
 
-public class EnemyDetected : DetectedObject
+public class EnemyDetected : MonoBehaviour
 {
-    public override event Action<Transform> OnDetectedObject;
+    public event Action<Transform> OnDetectedObject;
 
-    public override void DetectedLogick()
+    [SerializeField] protected float _detectionRange = 5f;
+    [SerializeField] protected LayerMask _detectedlayerMask;
+    [SerializeField] private Color _gizmosColor = Color.red;
+
+    public void SetupDetectionRange(float range)
+    {
+        _detectionRange = range;
+    }
+
+    private void LateUpdate()
     {
         Collider2D[] detectedEnemies = Physics2D.OverlapCircleAll(transform.position, _detectionRange, _detectedlayerMask);
 
@@ -25,5 +34,11 @@ public class EnemyDetected : DetectedObject
             }
             OnDetectedObject.Invoke(closestObject);
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = _gizmosColor;
+        Gizmos.DrawWireSphere(transform.position, _detectionRange);
     }
 }
