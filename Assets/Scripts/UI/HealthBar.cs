@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Slider _slider;
+    [SerializeField] private Slider _sliderHealt;
+    [SerializeField] private TMP_Text _textHealt;
 
     private void Awake()
     {
@@ -12,15 +14,17 @@ public class HealthBar : MonoBehaviour
 
     public void SetupBar(float currentHealth, float maxHealth)
     {
-        _slider.maxValue = maxHealth;
-        _slider.value = currentHealth;
+        _sliderHealt.maxValue = maxHealth;
+        _sliderHealt.value = currentHealth;
+        _textHealt.text = $"{_sliderHealt.value}/{_sliderHealt.maxValue}";
     }
 
     public void UpdateBar(float health) 
     {
-        if (_slider.value - health <= 0)
-            _slider.value = 0;
+        if (_sliderHealt.value - health <= 0)
+            _sliderHealt.value = 0;
 
-        _slider.value = health;
+        _sliderHealt.value = health;
+        _textHealt.text = $"{_sliderHealt.value}/{_sliderHealt.maxValue}";
     }
 }

@@ -1096,7 +1096,7 @@ MonoBehaviour:
   _yesButton: {fileID: 1011985254}
   _noButton: {fileID: 1417969959}
   _text: {fileID: 1374812261}
-  _inventory: {fileID: 0}
+  _inventory: {fileID: 1600426538}
 --- !u!114 &418248840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,7 +1189,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2077,10 +2077,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2d34f753cf508498f87f343384bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyPrefabs:
+  - {fileID: 2325230062826724480, guid: 87f7f0e4ee91cd741af16a2e175c4f6b, type: 3}
+  - {fileID: 2325230062826724480, guid: 654d8d9cff5999449b69109bf4c4a945, type: 3}
   _spawnTilemap: {fileID: 1105419349}
   _countEnemy: 3
-  _enemyPrefab: {fileID: 1917766884122533026, guid: 87f7f0e4ee91cd741af16a2e175c4f6b, type: 3}
-  _playerTransform: {fileID: 1600426533}
+  _player: {fileID: 1600426536}
 --- !u!4 &874904926
 Transform:
   m_ObjectHideFlags: 0
@@ -26709,11 +26711,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1600426533}
-  - component: {fileID: 1600426531}
   - component: {fileID: 1600426535}
   - component: {fileID: 1600426534}
   - component: {fileID: 1600426536}
   - component: {fileID: 1600426538}
+  - component: {fileID: 1600426539}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -26721,32 +26723,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &1600426531
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600426530}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2.2}
-  m_EdgeRadius: 0
 --- !u!4 &1600426533
 Transform:
   m_ObjectHideFlags: 0
@@ -26812,8 +26788,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4581fb10d52e44381f1cad62643c8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
-  _currentHealth: 100
+  _maxHealth: 200
+  _currentHealth: 200
   _healthBar: {fileID: 1221716784}
 --- !u!114 &1600426538
 MonoBehaviour:
@@ -26830,6 +26806,32 @@ MonoBehaviour:
   _inventoryData: {fileID: 11400000, guid: d79925ee1a8f6254fb9f51cd1c404bec, type: 2}
   _maxItems: 10
   _inventoryDisplay: {fileID: 2649716}
+--- !u!61 &1600426539
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600426530}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0790115, y: -0.04962018}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.72076213, y: 1.4893126}
+  m_EdgeRadius: 0
 --- !u!1 &1619281349
 GameObject:
   m_ObjectHideFlags: 0

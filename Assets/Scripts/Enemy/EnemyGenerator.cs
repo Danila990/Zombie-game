@@ -1,14 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class EnemyGenerator : MonoBehaviour
 {
+    [SerializeField] private EnemyStateMashine[] _enemyPrefabs;
     [SerializeField] private Tilemap _spawnTilemap;
     [SerializeField] private int _countEnemy;
-    [SerializeField] private Enemy _enemyPrefab;
-    [SerializeField] private Transform _playerTransform;
+
+    [SerializeField] private Player _player;
 
     private void Awake()
     {
@@ -38,12 +38,11 @@ public class EnemyGenerator : MonoBehaviour
                     int randomIndex = Random.Range(0, possibleSpawnPositions.Count);
                     Vector3Int randomPosition = possibleSpawnPositions[randomIndex];
                     worldPosition = _spawnTilemap.GetCellCenterWorld(randomPosition);
-                    if (Vector3.Distance(worldPosition, _playerTransform.position) >= 10)
+                    if (Vector3.Distance(worldPosition, _player.transform.position) >= 10)
                         break;
                 }
-                
-                Enemy enemy = Instantiate(_enemyPrefab, new Vector2(worldPosition.x, worldPosition.y), Quaternion.identity);
-                enemy.Init(_playerTransform);
+                EnemyStateMashine enemy = Instantiate(_enemyPrefabs[Random.Range(0, _enemyPrefabs.Length)], new Vector2(worldPosition.x, worldPosition.y), Quaternion.identity);
+                enemy.Init(_player);
             }
         }
     }
