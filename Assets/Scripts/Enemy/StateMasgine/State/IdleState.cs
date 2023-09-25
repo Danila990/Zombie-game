@@ -1,21 +1,22 @@
-﻿using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class IdleState : EnemyState
 {
-    [SerializeField] private float _triggerRange = 5;
-    [SerializeField] private float _timeToMove = 2;
-    [SerializeField] private float _speedIdle = 5;
-    [SerializeField] private EnemyHealth _enemyHealth;
-    [SerializeField] private float _rangeMove = 4;
+    private bool _isAwaitMove => _timer.IsTimerEnd;
 
-    private bool _isAwaitMove = true;
-    private float _timerMove = 0;
+    [SerializeField] private float _triggerRange = 5f;
+    [SerializeField] private float _awaitTime = 2f;
+    [SerializeField] private float _speedIdle = 5f;
+    [SerializeField] private float _rangeMove = 4f;
+    [SerializeField] private EnemyHealth _enemyHealth;
+
     private Vector3 _randomPoint = Vector3.zero;
+    private Timer _timer;
 
     private void OnEnable()
     {
         _enemyHealth.OnTakeDamage += Exit;
+        _timer = new Timer(_awaitTime);
         RandomPoint();
     }
 
@@ -24,21 +25,10 @@ public class IdleState : EnemyState
         _enemyHealth.OnTakeDamage -= Exit;
     }
 
-    private void Update()
-    {
-        _timerMove += Time.deltaTime;
-        if (_timerMove >= _timeToMove && _isAwaitMove)
-        {
-            _isAwaitMove = false;
-            RandomPoint();
-            _timerMove = _timeToMove;
-        }
-    }
-
     private void LateUpdate()
     {
         if (Vector3.Distance(_randomPoint, transform.position) <= 0.3f && !_isAwaitMove)
-            _isAwaitMove = true;
+            _timer.StartTime();
 
         if (Vector3.Distance(_player.transform.position, transform.position) <= _triggerRange && _player.gameObject.activeSelf)
             Exit();

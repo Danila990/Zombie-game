@@ -21,7 +21,6 @@ public class EnemyStateMashine : MonoBehaviour
         if (_currentState > _states.Length)
             _currentState = _states.Length;
         ChangeState();
-
     }
 
     public void TransitToPrevious()
@@ -35,9 +34,7 @@ public class EnemyStateMashine : MonoBehaviour
     private void ChangeState()
     {
         foreach (var state in _states)
-        {
             state.enabled = false;
-        }
 
         _states[_currentState].Enter(_player, this);
         _states[_currentState].enabled = true;

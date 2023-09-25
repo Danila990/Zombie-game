@@ -745,11 +745,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 318661768}
-  - component: {fileID: 318661769}
   - component: {fileID: 318661771}
   - component: {fileID: 318661773}
   m_Layer: 7
-  m_Name: Guns
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,23 +771,6 @@ Transform:
   m_Father: {fileID: 1600426533}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &318661769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 318661767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b62fa1831dd83b49b1b6b1a1d04a7d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentWeapon: {fileID: 2087561223}
-  _currentAim: {fileID: 318661771}
-  _fireButton: {fileID: 660861900}
-  _relaodButton: {fileID: 1742259920}
-  _ammoText: {fileID: 42861572}
 --- !u!114 &318661771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1696,8 +1678,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 318661769}
-        m_TargetAssemblyTypeName: ControllerGun, Assembly-CSharp
+      - m_Target: {fileID: 1600426540}
+        m_TargetAssemblyTypeName: ControllerWeapon, Assembly-CSharp
         m_MethodName: FireGun
         m_Mode: 1
         m_Arguments:
@@ -1974,6 +1956,7 @@ GameObject:
   m_Component:
   - component: {fileID: 732033548}
   - component: {fileID: 732033549}
+  - component: {fileID: 732033550}
   m_Layer: 7
   m_Name: PistolGun
   m_TagString: Untagged
@@ -2011,13 +1994,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _statsGun:
-    _fireRate: 0.5
-    _firingRange: 5
-    _maxAmmo: 5
-    _reloadRate: 2
-    _bulletSpeed: 10
     _damage: 20
-  _currentAmmo: 5
+    _attackSpeed: 0.3
+    _reloadSpeed: 3
+    _attackRange: 10
+    _bulletSpeed: 10
+    _maxAmmo: 7
+--- !u!114 &732033550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732033547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f53f28009e46bd4696e071f3a4a393c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 5751982040429057092, guid: 609dc75017ad31b45837ca83e3532183, type: 3}
   _barrelGun: {fileID: 1166203430}
 --- !u!1 &809134789
@@ -2452,13 +2446,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 318661769}
-        m_TargetAssemblyTypeName: ControllerGun, Assembly-CSharp
+      - m_Target: {fileID: 1600426540}
+        m_TargetAssemblyTypeName: ControllerWeapon, Assembly-CSharp
         m_MethodName: SetupGun
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2087561223}
-          m_ObjectArgumentAssemblyTypeName: Gun, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: GunWeapon, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -26953,13 +26947,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 318661769}
-        m_TargetAssemblyTypeName: ControllerGun, Assembly-CSharp
+      - m_Target: {fileID: 1600426540}
+        m_TargetAssemblyTypeName: ControllerWeapon, Assembly-CSharp
         m_MethodName: SetupGun
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 732033549}
-          m_ObjectArgumentAssemblyTypeName: Gun, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: GunWeapon, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -27013,10 +27007,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1600426533}
   - component: {fileID: 1600426535}
+  - component: {fileID: 1600426539}
   - component: {fileID: 1600426534}
   - component: {fileID: 1600426536}
   - component: {fileID: 1600426538}
-  - component: {fileID: 1600426539}
+  - component: {fileID: 1600426540}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -27134,6 +27129,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.72076213, y: 1.4893126}
   m_EdgeRadius: 0
+--- !u!114 &1600426540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600426530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b62fa1831dd83b49b1b6b1a1d04a7d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentGun: {fileID: 2087561223}
+  _currentAim: {fileID: 318661771}
+  _fireButton: {fileID: 660861900}
+  _relaodButton: {fileID: 1742259920}
+  _ammoText: {fileID: 42861572}
 --- !u!1 &1619281349
 GameObject:
   m_ObjectHideFlags: 0
@@ -28479,8 +28491,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 318661769}
-        m_TargetAssemblyTypeName: ControllerGun, Assembly-CSharp
+      - m_Target: {fileID: 1600426540}
+        m_TargetAssemblyTypeName: ControllerWeapon, Assembly-CSharp
         m_MethodName: ReloadGun
         m_Mode: 1
         m_Arguments:
@@ -29586,6 +29598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2087561222}
   - component: {fileID: 2087561223}
+  - component: {fileID: 2087561224}
   m_Layer: 7
   m_Name: AK-74Gun
   m_TagString: Untagged
@@ -29623,17 +29636,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _statsGun:
-    _fireRate: 0.2
-    _firingRange: 10
-    _maxAmmo: 30
-    _reloadRate: 5
-    _bulletSpeed: 20
     _damage: 35
-  _currentAmmo: 15
-  _bulletPrefab: {fileID: 5751982040429057092, guid: 609dc75017ad31b45837ca83e3532183, type: 3}
-  _barrelGun: {fileID: 1706691694}
+    _attackSpeed: 0.3
+    _reloadSpeed: 3
+    _attackRange: 10
+    _bulletSpeed: 20
+    _maxAmmo: 15
   _needAmmoId: 5.45x39
   _inventory: {fileID: 1600426538}
+--- !u!114 &2087561224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087561220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f53f28009e46bd4696e071f3a4a393c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 5751982040429057092, guid: 609dc75017ad31b45837ca83e3532183, type: 3}
+  _barrelGun: {fileID: 1706691694}
 --- !u!1 &2130302471
 GameObject:
   m_ObjectHideFlags: 0

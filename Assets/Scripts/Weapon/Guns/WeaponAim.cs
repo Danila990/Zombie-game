@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyDetected))]
-public class GunAim : MonoBehaviour
+public class WeaponAim : MonoBehaviour
 {
     [SerializeField] private FixedJoystick _joystick;
     [SerializeField] private float _aimRange = 5f;

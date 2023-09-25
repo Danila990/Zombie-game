@@ -1,26 +1,16 @@
 ﻿using UnityEngine;
 
-public class StandartGun : Gun
+public class StandartGun : GunWeapon
 {
     [SerializeField] private string _needAmmoId;
     [SerializeField] private BackpackInventory _inventory;
 
-    public override void FireGun()
-    {
-        if (!_isReaduFire || _currentAmmo <= 0 || !_isReaduReload) return;
-
-        _currentAmmo--;
-
-        SpawnBullet();
-        FireTimer();
-    }
-
     public override void ReloadGun()
     {
-        if (!_isReaduReload || _currentAmmo == _statsGun.MaxAmmo) return;
-        if(_inventory.Finditem(_needAmmoId, out int countItem))
+        if (!IsReadyReload || _currentAmmo == _statsGun.MaxAmmo) return;
+        if (_inventory.Finditem(_needAmmoId, out int countItem))
         {
-            ReloadTimer();
+            StartTimer(_reloadTimer);
 
             if (countItem > _statsGun.MaxAmmo - _currentAmmo)
             {
