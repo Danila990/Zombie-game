@@ -1,16 +1,19 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-public class AttackMiliState : EnemyState
+public class AttackMeleeState : EnemyState
 {
+    private bool IsReadyAttack => _attackTimer.IsTimerEnd;
+
     [SerializeField] private float _damage = 20f;
     [SerializeField] private float _rangeAttack = 1f;
     [SerializeField] private float _moveSpeed = 5;
-    [SerializeField] private float _attackRate = 0.5f;
+    [SerializeField] private float _attackSpeed = 0.5f;
 
     private Rigidbody2D _rigidbody2D;
     private Vector2 _movement;
-    private bool _isReadiAttack = true;
+    private Timer _attackTimer;
+
 
     private void Start()
     {
@@ -19,6 +22,7 @@ public class AttackMiliState : EnemyState
 
     private void OnEnable()
     {
+        _attackTimer = new Timer(_attackSpeed);
         _player.OnPlayerDead += Exit;
     }
 
@@ -38,10 +42,10 @@ public class AttackMiliState : EnemyState
 
 
 
-        if (Vector3.Distance(_player.transform.position, transform.position) <= _rangeAttack && _isReadiAttack)
+        if (Vector3.Distance(_player.transform.position, transform.position) <= _rangeAttack && IsReadyAttack)
         {
             _player.TakeDamage(_damage);
-            AttackTimer();
+            _attackTimer.StartTime();
         }
     }
 
@@ -53,12 +57,5 @@ public class AttackMiliState : EnemyState
     public override void Exit()
     {
         _stateMashine.TransitToPrevious();
-    }
-
-    private async void AttackTimer()
-    {
-        _isReadiAttack = false;
-        await Task.Delay((int)(_attackRate * 1000));
-        _isReadiAttack = true;
     }
 }

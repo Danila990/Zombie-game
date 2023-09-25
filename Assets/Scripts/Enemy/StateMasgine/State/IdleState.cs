@@ -2,7 +2,7 @@
 
 public class IdleState : EnemyState
 {
-    private bool _isAwaitMove => _timer.IsTimerEnd;
+    private bool IsAwaitMove => _awaitTimer.IsTimerEnd;
 
     [SerializeField] private float _triggerRange = 5f;
     [SerializeField] private float _awaitTime = 2f;
@@ -11,12 +11,12 @@ public class IdleState : EnemyState
     [SerializeField] private EnemyHealth _enemyHealth;
 
     private Vector3 _randomPoint = Vector3.zero;
-    private Timer _timer;
+    private Timer _awaitTimer;
 
     private void OnEnable()
     {
         _enemyHealth.OnTakeDamage += Exit;
-        _timer = new Timer(_awaitTime);
+        _awaitTimer = new Timer(_awaitTime);
         RandomPoint();
     }
 
@@ -27,14 +27,14 @@ public class IdleState : EnemyState
 
     private void LateUpdate()
     {
-        if (_isAwaitMove)
+        if (IsAwaitMove)
         {
             Vector3 direction = _randomPoint - transform.position;
             transform.Translate(direction.normalized * _speedIdle * Time.deltaTime);
 
             if (Vector3.Distance(_randomPoint, transform.position) <= 0.3f)
             {
-                _timer.StartTime();
+                _awaitTimer.StartTime();
                 RandomPoint();
             }    
         }
