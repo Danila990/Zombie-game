@@ -27,14 +27,21 @@ public class IdleState : EnemyState
 
     private void LateUpdate()
     {
-        if (Vector3.Distance(_randomPoint, transform.position) <= 0.3f && !_isAwaitMove)
-            _timer.StartTime();
+        if (_isAwaitMove)
+        {
+            Vector3 direction = _randomPoint - transform.position;
+            transform.Translate(direction.normalized * _speedIdle * Time.deltaTime);
+
+            if (Vector3.Distance(_randomPoint, transform.position) <= 0.3f)
+            {
+                _timer.StartTime();
+                RandomPoint();
+            }    
+        }
+
 
         if (Vector3.Distance(_player.transform.position, transform.position) <= _triggerRange && _player.gameObject.activeSelf)
             Exit();
-
-        Vector3 direction = _randomPoint - transform.position;
-        transform.Translate(direction.normalized * _speedIdle * Time.deltaTime);
     }
 
     private void RandomPoint()
