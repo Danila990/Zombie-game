@@ -1,4 +1,4 @@
-# TestTask
+# GameDevClub_TestTask
 Тестовое Задание
 Привет!
 Используя Unity 2021.3.26f1 создать проект.
